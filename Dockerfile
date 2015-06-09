@@ -9,7 +9,8 @@ COPY unison-2.48.3.tar.gz /tmp/unison/
 
 # Build and install Unison versions then cleanup
 COPY unison-install.sh .
-RUN apt-get update -y \
+RUN sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ocaml/xUbuntu_14.04/ /' >> /etc/apt/sources.list.d/ocaml.list" \
+ && apt-get update -y \
  && apt-get install -y ocaml build-essential exuberant-ctags \
  && ./unison-install.sh \
  && apt-get purge -y ocaml build-essential exuberant-ctags \
