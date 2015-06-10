@@ -1,6 +1,9 @@
 # Docker-Unison
 A docker volume container using [Unison](http://www.cis.upenn.edu/~bcpierce/unison/) for fast two-way folder sync. Created as an alternative to [slow boot2docker volumes on OS X](https://github.com/boot2docker/boot2docker/issues/593).
 
+The docker image is available on Docker Hub: 
+[registry.hub.docker.com/u/leighmcculloch/unison/](https://registry.hub.docker.com/u/leighmcculloch/unison/)
+
 ## Usage
 
 ### Docker
