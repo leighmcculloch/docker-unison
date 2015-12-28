@@ -22,13 +22,14 @@ RUN apt-get update -y \
  && apt-get autoremove -y \
  && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/*
 
-# Set default Unison version
+# Set default Unison configuration
 ENV UNISON_VERSION=2.48.3
+ENV UNISON_WORKING_DIR=/unison
 
 # Set working directory to be the home directory
 WORKDIR /root
 
 # Setup unison to run as a service
-VOLUME /unison
+VOLUME $UNISON_WORKING_DIR
 COPY unison-run.sh /etc/service/unison/run
 EXPOSE 5000
