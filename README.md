@@ -11,13 +11,13 @@ The docker image is available on Docker Hub:
 First, you can launch a volume container exposing a volume with Unison.
 
 ```bash
-$ CID=$(docker run -d -p 5000:5000 -e UNISON_VERSION=2.48.3 leighmcculloch/unison)
+$ CID=$(docker run -d -p 5000:5000 -e UNISON_VERSION=2.48.3 UNISON_DIR=/unison leighmcculloch/unison)
 ```
 
-You can then sync a local folder to `/unison` in the container with:
+You can then sync a local folder to the folder defined with `UNISON_DIR`, in this case `/unison` in the container with:
 
 ```bash
-$ unison . socket://<docker>:5000/ -auto -batch
+$ unison <local_folder> socket://<docker>:5000/ -auto -batch
 ```
 
 Next, you can launch a container connected with the volume under `/unison`.
@@ -40,7 +40,8 @@ mywebserver:
 unison:  
   image: leighmcculloch/unison  
   environment:  
-    - UNISON_VERSION=2.48.3  
+    - UNISON_VERSION=2.48.3 
+    - UNISON_DIR=/unison
   ports:  
     - "5000:5000"
 ```
