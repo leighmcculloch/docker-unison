@@ -1,6 +1,6 @@
 #!/bin/sh
 export HOME=/root
-cd /unison
+cd $UNISON_DIR
 if [ -f /bin/unison-$UNISON_VERSION-fsmonitor ]; then
   ln -s -f /bin/unison-$UNISON_VERSION-fsmonitor /bin/unison-fsmonitor
 fi
