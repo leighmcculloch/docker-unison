@@ -24,11 +24,12 @@ RUN apt-get update -y \
 
 # Set default Unison version
 ENV UNISON_VERSION=2.48.3
+ENV UNISON_DIR=/unison
 
 # Set working directory to be the home directory
 WORKDIR /root
 
 # Setup unison to run as a service
-VOLUME /unison
+VOLUME $UNISON_DIR
 COPY unison-run.sh /etc/service/unison/run
 EXPOSE 5000
