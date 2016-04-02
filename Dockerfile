@@ -26,6 +26,9 @@ RUN apt-get update -y \
 ENV UNISON_VERSION=2.48.3
 ENV UNISON_WORKING_DIR=/unison
 
+COPY unison-link.sh .
+RUN ./unison-link.sh
+
 # Set working directory to be the home directory
 WORKDIR /root
 
