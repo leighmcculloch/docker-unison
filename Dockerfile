@@ -15,7 +15,7 @@ RUN apt-get update -y \
  && apt-key add - < Release.key \
  && sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ocaml/xUbuntu_14.04/ /' >> /etc/apt/sources.list.d/ocaml.list" \
  && apt-get update -y \
- && apt-get install -y ocaml=4.01.0-3ubuntu3 camlp4=4.01.0-3ubuntu3 ocaml-nox=4.01.0-3ubuntu3 ocaml-base=4.01.0-3ubuntu3 ocaml-interp=4.01.0-3ubuntu3 ocaml-base-nox=4.01.0-3ubuntu3 ocaml-compiler-libs=4.01.0-3ubuntu3
+ && apt-get install -y ocaml=4.01.0-3ubuntu3 camlp4=4.01.0-3ubuntu3 ocaml-nox=4.01.0-3ubuntu3 ocaml-base=4.01.0-3ubuntu3 ocaml-interp=4.01.0-3ubuntu3 ocaml-base-nox=4.01.0-3ubuntu3 ocaml-compiler-libs=4.01.0-3ubuntu3 \
  && apt-get install -y build-essential exuberant-ctags \
  && ./unison-install.sh \
  && apt-get purge -y ocaml build-essential exuberant-ctags \
