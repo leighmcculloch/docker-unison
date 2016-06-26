@@ -4,36 +4,30 @@ CMD ["/sbin/my_init"]
 MAINTAINER Leigh McCulloch
 
 # Upload Unison for building
-COPY unison-2.40.102.tar.gz /tmp/unison/
-COPY unison-2.48.3.tar.gz /tmp/unison/
+COPY container /
 
 # Build and install Unison versions then cleanup
-COPY unison-install.sh .
 RUN apt-get update -y \
- && apt-get install -y wget \
- && wget http://download.opensuse.org/repositories/home:ocaml/xUbuntu_14.04/Release.key \
+ && curl -LO http://download.opensuse.org/repositories/home:ocaml/xUbuntu_14.04/Release.key \
  && apt-key add - < Release.key \
- && sh -c "echo 'deb http://download.opensuse.org/repositories/home:/ocaml/xUbuntu_14.04/ /' >> /etc/apt/sources.list.d/ocaml.list" \
  && apt-get update -y \
- && apt-get install -y ocaml=4.01.0-3ubuntu3 camlp4=4.01.0-3ubuntu3 ocaml-nox=4.01.0-3ubuntu3 ocaml-base=4.01.0-3ubuntu3 ocaml-interp=4.01.0-3ubuntu3 ocaml-base-nox=4.01.0-3ubuntu3 ocaml-compiler-libs=4.01.0-3ubuntu3 \
- && apt-get install -y build-essential exuberant-ctags \
- && ./unison-install.sh \
- && apt-get purge -y ocaml build-essential exuberant-ctags \
+ && dependencies-install.sh \
+ && unison-install.sh \
+ && apt-get purge -y ocaml ocaml-* camlp4 build-essential exuberant-ctags \
  && apt-get clean autoclean \
  && apt-get autoremove -y \
  && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/*
 
 # Set default Unison configuration
 ENV UNISON_VERSION=2.48.3
+ENV OCAML_VERSION=4.02
 ENV UNISON_WORKING_DIR=/unison
 
-COPY unison-link.sh .
-RUN ./unison-link.sh
+RUN unison-link.sh
 
 # Set working directory to be the home directory
 WORKDIR /root
 
 # Setup unison to run as a service
 VOLUME $UNISON_WORKING_DIR
-COPY unison-run.sh /etc/service/unison/run
 EXPOSE 5000
