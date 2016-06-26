@@ -1,5 +1,6 @@
 #!/bin/sh
 
+OCAML_VERSION=$1
 cd /tmp/unison
 for UNISON_TAR_GZ in `find *.tar.gz`
 do
@@ -10,5 +11,5 @@ do
   cd $UNISON_RELEASE
   make UISTYLE=text
   cp unison /bin/$UNISON_RELEASE
-  cp unison-fsmonitor /bin/unison-fsmonitor-$UNISON_VERSION
+  cp unison-fsmonitor /bin/unison-fsmonitor-$UNISON_VERSION-ocaml_$OCAML_VERSION
 done
