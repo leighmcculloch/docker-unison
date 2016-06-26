@@ -5,6 +5,7 @@ MAINTAINER Leigh McCulloch
 
 # Upload Unison for building
 COPY container /
+ENV OCAML_VERSION=4.02
 
 # Build and install Unison versions then cleanup
 RUN apt-get update -y \
@@ -20,7 +21,6 @@ RUN apt-get update -y \
 
 # Set default Unison configuration
 ENV UNISON_VERSION=2.48.3
-ENV OCAML_VERSION=4.02
 ENV UNISON_WORKING_DIR=/unison
 
 RUN unison-link.sh
