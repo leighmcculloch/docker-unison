@@ -1,6 +1,6 @@
 #!/bin/sh
 
-case "${OCAML_VERSION}" in
+case "$OCAML_VERSION" in
   '4.02')
     apt-get install -y ocaml
     ;;
