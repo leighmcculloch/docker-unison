@@ -1,18 +1,18 @@
 #!/bin/sh
 
-case $OCAML_VERSION in
+case "${OCAML_MINOR_VERSION}" in
   '4.02')
     apt-get install -y ocaml
     ;;
   *)
     apt-get install -y\
-    ocaml=$OCAML_VERSION.*\
-    camlp4=$OCAML_VERSION.*\
-    ocaml-nox=$OCAML_VERSION.*\
-    ocaml-base=$OCAML_VERSION.*\
-    ocaml-interp=$OCAML_VERSION.*\
-    ocaml-base-nox=$OCAML_VERSION.*\
-    ocaml-compiler-libs=$OCAML_VERSION.*\
+    ocaml=${OCAML_MINOR_VERSION}.*\
+    camlp4=${OCAML_MINOR_VERSION}.*\
+    ocaml-nox=${OCAML_MINOR_VERSION}.*\
+    ocaml-base=${OCAML_MINOR_VERSION}.*\
+    ocaml-interp=${OCAML_MINOR_VERSION}.*\
+    ocaml-base-nox=${OCAML_MINOR_VERSION}.*\
+    ocaml-compiler-libs=${OCAML_MINOR_VERSION}.*\
     ;;
 esac
 

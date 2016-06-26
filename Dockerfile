@@ -5,7 +5,7 @@ MAINTAINER Leigh McCulloch
 
 # Upload Unison for building
 COPY container /
-ENV OCAML_VERSION=4.02
+ENV OCAML_MINOR_VERSION=4.02
 
 # Build and install Unison versions then cleanup
 RUN apt-get update -y \
