@@ -7,6 +7,8 @@ matrix:
   fast_finish: true
 
 before_install:
+  - sudo apt-get update
+  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
   - docker build --build-arg UNISON_VERSION=${UNISON_VERSION} --build-arg OCAML_VERSION=${OCAML_VERSION} -t ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} .;
 
 script:
