@@ -16,7 +16,7 @@ script:
 
 after_success:
   - if [ "${TRAVIS_BRANCH}" = "master" ]; then
-      docker login -e="${DOCKER_HUB_EMAIL}" -u="${DOCKER_HUB_USER}" -p="${DOCKER_HUB_PASS}";
+      docker login -u="${DOCKER_HUB_USER}" -p="${DOCKER_HUB_PASS}";
       docker push ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag};
     fi
 
