@@ -6,4 +6,6 @@ tar -zxvf ${UNISON_RELEASE}.tar.gz
 cd ${UNISON_RELEASE}
 make UISTYLE=text
 cp unison /bin/
-cp unison-fsmonitor /bin/
+if [ -f 'unison-fsmonitor' ]; then
+  cp unison-fsmonitor /bin/
+fi
