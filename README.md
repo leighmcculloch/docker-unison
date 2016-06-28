@@ -66,7 +66,7 @@ Unison requires the version of the client (running on the host) and server (runn
 ## Available Unison Images
 This docker repository includes common versions of Unison server compiled with different versions of OCaml. The version you need can be selected by choosing the appropriately tagged image from the docker hub repository. Images are tagged in the format:
 ```
-UNISON_VERSION-OCAML_VERSION
+UNISON_VERSION[-OCAML_VERSION]
 ```
 Supported versions are any combination of the following:  
 
@@ -74,6 +74,13 @@ Supported versions are any combination of the following:
  * OCaml 4.01 and 4.02
 
 Additional versions can be added easily on request. Open an Issue if you need another version.
+
+### Examples
+ * `leighmcculloch/unison:latest`: Unison 2.48.3, compiled with OCaml 4.02.
+ * `leighmcculloch/unison:2.48`: Same as latest.
+ * `leighmcculloch/unison:2.48-4.01`: Unison 2.48.3, compiled with OCaml 4.01.
+ * `leighmcculloch/unison:2.40`: Unison 2.40.102, compiled with OCaml 4.02.
+ * `leighmcculloch/unison:2.40-4.01`: Unison 2.40.102, compiled with OCaml 4.01.
 
 ## Installing fswatch Locally
 Get fswatch using `brew install fswatch` on Mac OS X otherwise [download and compile from a release build](http://emcrisostomo.github.io/fswatch/).
