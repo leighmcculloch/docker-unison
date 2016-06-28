@@ -35,5 +35,4 @@ env:
     - UNISON_VERSION=2.40.102 OCAML_VERSION=4.01 tag=2.40-4.01
   global:
     - LATEST_TAG=2.48
-    - DOCKER_REPO_USERNAME=leighmcculloch
     - DOCKER_REPO_SLUG=unison
