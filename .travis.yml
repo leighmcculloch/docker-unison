@@ -19,8 +19,8 @@ after_success:
       docker login -u="${DOCKER_HUB_USER}" -p="${DOCKER_HUB_PASS}";
       docker push ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag};
       if [ "${tag}" = "${LATEST_TAG}" ]; then
-        docker tag ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:latest
-        docker push ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:latest
+        docker tag ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:latest;
+        docker push ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:latest;
       fi
     fi
 
