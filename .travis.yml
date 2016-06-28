@@ -1,0 +1,32 @@
+sudo: required
+
+services:
+  - docker
+
+matrix:
+  fast_finish: true
+
+before_install:
+  - docker build -e UNISON_VERSION=${UNISON_VERSION} -e OCAML_VERSION=${OCAML_VERSION} -t ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} ${tag};
+
+script:
+  - docker run -d ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} /bin/unison -version
+
+after_success:
+  - if [ "${TRAVIS_BRANCH}" = "master" ]; then
+      docker login -e="${DOCKER_HUB_EMAIL}" -u="${DOCKER_HUB_USER}" -p="${DOCKER_HUB_PASS}";
+      docker push ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag};
+    fi
+
+notifications:
+  email: false
+
+env:
+  matrix:
+    - UNISON_VERSION=2.48.3 OCAML_VERSION=4.2 tag=latest
+    - UNISON_VERSION=2.48.3 OCAML_VERSION=4.1 tag=2.48-4.1
+    - UNISON_VERSION=2.40.102 OCAML_VERSION=4.2 tag=2.40
+    - UNISON_VERSION=2.48.3 OCAML_VERSION=4.2 tag=2.40-4.1
+  global:
+    - DOCKER_REPO_USERNAME=leighmcculloch
+    - DOCKER_REPO_SLUG=unison

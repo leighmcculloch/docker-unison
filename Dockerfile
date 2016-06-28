@@ -11,15 +11,15 @@ RUN apt-get update -y \
  && curl -LO http://download.opensuse.org/repositories/home:ocaml/xUbuntu_14.04/Release.key \
  && apt-key add - < Release.key \
  && apt-get update -y \
- && unison-compile-each.sh \
+ && dependencies-install.sh \
+ && unison-install.sh \
+ && dependencies-purge.sh \
  && rm -rf /var/lib/{apt,dpkg,cache,log}/ /tmp/* /var/tmp/*
 
 # Set default Unison configuration
 ENV UNISON_VERSION=2.48.3
 ENV UNISON_WORKING_DIR=/unison
-ENV OCAML_MINOR_VERSION=4.02
-
-RUN unison-link.sh
+ENV OCAML_VERSION=4.02
 
 # Set working directory to be the home directory
 WORKDIR /root
