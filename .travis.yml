@@ -7,7 +7,7 @@ matrix:
   fast_finish: true
 
 before_install:
-  - docker build -t ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} ${tag};
+  - docker build -t ${DOCKER_REGISTRY}/${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} ${tag};
 
 script:
   - docker run -d ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} /bin/unison -version
@@ -15,6 +15,7 @@ script:
 after_success:
   - if [ "${TRAVIS_BRANCH}" = "master" ]; then
       docker login -e="${DOCKER_HUB_EMAIL}" -u="${DOCKER_HUB_USER}" -p="${DOCKER_HUB_PASS}";
+      docker tag ${DOCKER_REGISTRY}/${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag};
       docker push ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag};
     fi
 
@@ -28,5 +29,6 @@ env:
     - UNISON_VERSION=2.40.102 OCAML_VERSION=4.2 tag=2.40
     - UNISON_VERSION=2.48.3 OCAML_VERSION=4.2 tag=2.40-4.1
   global:
+    - DOCKER_REGISTRY=local
     - DOCKER_REPO_USERNAME=leighmcculloch
     - DOCKER_REPO_SLUG=unison
