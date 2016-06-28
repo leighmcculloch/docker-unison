@@ -7,7 +7,7 @@ matrix:
   fast_finish: true
 
 before_install:
-  - docker build -t ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} .;
+  - docker build -e UNISON_VERSION=${UNISON_VERSION} -e OCAML_VERSION=${OCAML_VERSION} -t ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} .;
 
 script:
   - docker run -d ${DOCKER_REPO_USERNAME}/${DOCKER_REPO_SLUG}:${tag} /bin/unison -version
