@@ -11,7 +11,7 @@ The docker image is available on Docker Hub:
 First, you can launch a volume container exposing a volume with Unison.
 
 ```bash
-$ CID=$(docker run -d -p 5000:5000 -e UNISON_VERSION=2.48.3 -e UNISON_WORKING_DIR=/unison leighmcculloch/unison)
+$ CID=$(docker run -d -p 5000:5000 -e UNISON_WORKING_DIR=/unison leighmcculloch/unison:latest)
 ```
 
 You can then sync a local folder to `/unison` in the container with:
@@ -38,9 +38,8 @@ mywebserver:
   volumes_from:  
     - unison  
 unison:  
-  image: leighmcculloch/unison  
+  image: leighmcculloch/unison:latest  
   environment:  
-    - UNISON_VERSION=2.48.3  
     - UNISON_WORKING_DIR=/unison  
   ports:  
     - "5000:5000"
@@ -59,10 +58,20 @@ $ fswatch -o . | xargs -n1 -I{} unison . socket://<docker>:5000/ -ignore 'Path .
 ```
 
 ## Installing Unison Locally
-Unison requires the version of the client (running on the host) and server (running in the container) to match. This docker image includes common versions of Unison server which can be selected with the `UNISON_VERSION` environment variable.
+Unison requires the version of the client (running on the host) and server (running in the container) to match. 
 
-* 2.40.102 (available via `apt-get install unison` on Ubuntu 14.04, 14.10, 15.04)
-* 2.48.3 (available via `brew install unison` on Mac OS X) [default]
+ * 2.40.102 (available via `apt-get install unison` on Ubuntu 14.04, 14.10, 15.04) [compiled with ocaml 4.01]
+ * 2.48.3 (available via `brew install unison` on Mac OS X) [compiled with ocaml 4.02]
+
+## Available Unison Images
+This docker repository includes common versions of Unison server compiled with different versions of OCaml. The version you need can be selected by choosing the appropriately tagged image from the docker hub repository. Images are tagged in the format:
+```
+UNISON_VERSION-OCAML_VERSION
+```
+Supported versions are any combination of the following:  
+
+ * Unison 2.40 and 2.48
+ * OCaml 4.01 and 4.02
 
 Additional versions can be added easily on request. Open an Issue if you need another version.
 
