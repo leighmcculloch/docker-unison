@@ -7,8 +7,8 @@ MAINTAINER Leigh McCulloch
 COPY container /
 
 # Allow setting these on build
-ARG UNISON_VERSION=${UNISON_VERSION}
-ARG OCAML_VERSION=${OCAML_VERSION}
+ARG UNISON_VERSION=2.48.3
+ARG OCAML_VERSION=4.02
 
 # Build and install Unison versions then cleanup
 RUN apt-get update -y \
