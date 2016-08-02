@@ -11,7 +11,7 @@ The docker image is available on Docker Hub:
 First, you can launch a volume container exposing a volume with Unison.
 
 ```bash
-$ CID=$(docker run -d -p 5000:5000 -e UNISON_WORKING_DIR=/unison leighmcculloch/unison:latest)
+$ CID=$(docker run -d -p 5000:5000 -e UNISON_WORKING_DIR=/unison -v /unison leighmcculloch/unison:latest)
 ```
 
 You can then sync a local folder to `/unison` in the container with:
@@ -41,6 +41,8 @@ unison:
   image: leighmcculloch/unison:latest  
   environment:  
     - UNISON_WORKING_DIR=/unison  
+  volumes:
+    - /unison
   ports:  
     - "5000:5000"
 ```
